@@ -34,23 +34,28 @@ import { useState } from "react";
 import { Menu, Moon, Sun } from "lucide-react";
 import { Button } from "../ui/button";
 import { useTheme } from "next-themes";
+import Icon from "../ui/icon";
 
 const routes = [
   {
     name: "Dashboard",
-    href: "/dashboad",
+    href: "/dashboard",
+    icon: "gauge",
   },
   {
     name: "Central de vendas",
     href: "/central-de-vendas",
+    icon: "badge-dollar-sign",
   },
   {
     name: "Central de produtos",
-    href: "/central-de-produtos",
+    href: "/produtos",
+    icon: "shopping-basket",
   },
   {
     name: "Financeiro",
     href: "/financeiro",
+    icon: "wallet",
   },
 ];
 export function Navbar() {
@@ -59,19 +64,32 @@ export function Navbar() {
     <div className="h-14 px-4 flex items-center justify-between bg-background border-b">
       <div className="flex gap-10">
         <Sheet>
-          <SheetTrigger className="md:hidden"><Menu className="h-6 w-6" /></SheetTrigger>
-          <SheetContent side={"left"}>
-            <SheetHeader>
-              <SheetTitle>Are you absolutely sure?</SheetTitle>
-              <SheetDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </SheetDescription>
+          <SheetTrigger className="md:hidden">
+            <Menu className="h-6 w-6" />
+          </SheetTrigger>
+          <SheetContent side={"left"} className="w-64">
+            <div className="border-b">
+            <SheetHeader className="justify-center items-start pl-6 h-14">
+              <SheetTitle>GANKYO</SheetTitle>
             </SheetHeader>
+            </div>
+            <div className="pt-6">
+              {routes.map((item, index) => (
+                <Link href={item.href} key={index}>
+                <Button
+                  
+                  variant={"ghost"}
+                  className="w-full gap-2 justify-start text-base px-8"
+                >
+                  {item.name}
+                </Button>
+                </Link>
+              ))}
+            </div>
           </SheetContent>
         </Sheet>
 
-        <span className="text-foreground font-bold text">GANKYO</span>
+        <span className="font-bold ">GANKYO</span>
         <nav className="hidden md:flex">
           <NavigationMenu className=" justify-start">
             <NavigationMenuList className="gap-4">

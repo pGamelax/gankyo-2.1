@@ -15,10 +15,10 @@ export default function Dashboard() {
       </div>
 
       <div className="pt-6 grid xl:grid-cols-4 sm:grid-cols-2  gap-2">
-      <CardDashboard title="Total Sales" icon="dollar-sign" value="$1,200" percentage="10%" />
-      <CardDashboard title="Total Sales" icon="dollar-sign" value="$1,200" percentage="10%" />
-      <CardDashboard title="Total Sales" icon="dollar-sign" value="$1,200" percentage="10%" />
-      <CardDashboard title="Total Sales" icon="dollar-sign" value="$1,200" percentage="10%" />
+      <CardDashboard title="Vendas do mes"  icon="dollar-sign" value="$1,200" percentage="10%" />
+      <CardDashboard title="Vendas da semana" icon="dollar-sign" value="$1,200" percentage="10%" />
+      <CardDashboard title="Vendas do dia" icon="dollar-sign" value="$1,200" percentage="10%" />
+      <CardDashboard title="Ultima venda" icon="dollar-sign" value="$1,200" percentage="10%" />
       </div>
       
     </div>
