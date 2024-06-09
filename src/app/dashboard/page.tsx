@@ -6,7 +6,7 @@ export default function Dashboard() {
   return (
     <div className="px-8 pt-6">
       <div className="flex flex-col gap-2 md:flex-row items-center justify-between">
-        <h1 className="text-2xl font-sans font-bold">Dashboard</h1>
+        <h1 className="xl:text-2xl font-sans font-bold">Dashboard</h1>
 
         <div className="flex flex-wrap gap-2 justify-center">
           <DatePickerWithRange />

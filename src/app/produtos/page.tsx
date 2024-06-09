@@ -11,9 +11,9 @@ export default function Produtos() {
           <EllipsisVertical className="w-4 h-4 sm:hidden md:hidden lg:hidden xl:hidden" />
         </div>
 
-        <div className="flex flex-row flex-wrap gap-2 md:p-0 justify-center">
+        <div className="flex flex-row  w-full  sm:w-max flex-wrap gap-2 md:p-0 justify-center">
           <Input type="text" placeholder="Produto" className="w-64" />
-          <Button variant="default" className="">
+          <Button variant="ghost" className="w-min h-min p-2">
             <Search className="w-6 h-6" />
           </Button>
           <Button variant="default" className="hidden sm:flex">
