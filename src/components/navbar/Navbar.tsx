@@ -21,6 +21,7 @@ import {
 
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -69,21 +70,22 @@ export function Navbar() {
           </SheetTrigger>
           <SheetContent side={"left"} className="w-64">
             <div className="border-b">
-            <SheetHeader className="justify-center items-start pl-6 h-14">
-              <SheetTitle>GANKYO</SheetTitle>
-            </SheetHeader>
+              <SheetHeader className="justify-center items-start pl-6 h-14">
+                <SheetTitle>GANKYO</SheetTitle>
+              </SheetHeader>
             </div>
             <div className="pt-6">
               {routes.map((item, index) => (
-                <Link href={item.href} key={index}>
-                <Button
-                  
-                  variant={"ghost"}
-                  className="w-full gap-2 justify-start text-base px-8"
-                >
-                  {item.name}
-                </Button>
-                </Link>
+                <SheetClose asChild  key={index}>
+                  <Link href={item.href}>
+                    <Button
+                      variant={"ghost"}
+                      className="w-full gap-2 justify-start text-base px-8"
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                </SheetClose>
               ))}
             </div>
           </SheetContent>
