@@ -62,7 +62,8 @@ const routes = [
 export function Navbar() {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="h-14 px-4 flex items-center justify-between bg-background border-b">
+    <div className="w-full fixed">
+    <div className="h-14 px-4 relative flex items-center justify-between bg-background border-b">
       <div className="flex gap-10">
         <Sheet>
           <SheetTrigger className="md:hidden">
@@ -140,6 +141,7 @@ export function Navbar() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+    </div>
     </div>
   );
 }
