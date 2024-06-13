@@ -224,7 +224,7 @@ export default function Produtos() {
 
   const header = ["id", "produto", "descricao", "preco", "quantidade"];
 
-  const handleSearch = (e) => {
+  const handleSearch = (e:any) => {
     e.preventDefault()
     const filteredProducts = row.filter((product) =>
       product.produto.toLowerCase().includes(search.toLowerCase())
