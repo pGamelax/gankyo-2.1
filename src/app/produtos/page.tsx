@@ -1,5 +1,6 @@
 "use client";
 import { Table } from "@/components/table/table";
+import { ColunmTable, Table2 } from "@/components/table/table2";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EllipsisVertical, Search } from "lucide-react";
@@ -222,10 +223,8 @@ export default function Produtos() {
 
   const [data, setData] = useState(row);
 
-  const header = ["id", "produto", "descricao", "preco", "quantidade"];
-
-  const handleSearch = (e:any) => {
-    e.preventDefault()
+  const handleSearch = (e: any) => {
+    e.preventDefault();
     const filteredProducts = row.filter((product) =>
       product.produto.toLowerCase().includes(search.toLowerCase())
     );
@@ -263,7 +262,36 @@ export default function Produtos() {
         </div>
       </div>
       <div className="pt-6 overflow-y">
-        <Table head={header} itens={data} />
+        {/*<Table head={header} itens={data} />*/}
+        <Table2 itens={data} className="w-full">
+          <ColunmTable
+            name="Id"
+            column="id"
+            className=" w-16 text-center border p-2"
+          />
+
+          <ColunmTable
+            name="Produto"
+            column="produto"
+            className=" w-80 text-start p-2 border"
+          />
+
+          <ColunmTable
+            name="Descricao"
+            column="descricao"
+            className=" border p-2 w-96"
+          />
+          <ColunmTable
+            name="Quantidade"
+            column="quantidade"
+            className="w-20 items-center border p-2"
+          />
+          <ColunmTable
+            name="Preco"
+            column="preco"
+            className="border p-2 w-24"
+          />
+        </Table2>
       </div>
     </div>
   );

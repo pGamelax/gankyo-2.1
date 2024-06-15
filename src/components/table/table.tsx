@@ -9,7 +9,6 @@ export function Table({ head, itens }: any) {
   const [order, setOrder] = useState(null);
   const [data, setData] = useState(itens);
 
-
   const handleSort = (field: any) => {
     setOrder(field);
     const order = sortOrder === "asc" ? "desc" : "asc";
@@ -24,8 +23,8 @@ export function Table({ head, itens }: any) {
   };
 
   useEffect(() => {
-    setData(itens)
-  }, [itens])
+    setData(itens);
+  }, [itens]);
 
   return (
     <table className="w-full">
@@ -62,11 +61,7 @@ export function Table({ head, itens }: any) {
               return (
                 <td
                   className={` text-start px-4 py-2
-              ${head == "produto" ? " w-3/12" : ""}
-              ${head == "descricao" ? " w-3/12" : ""}
-              ${head == "id" ? "w-1/12" : ""}
-              ${head == "preco" ? "w-1/6" : ""}
-              ${head == 'quantidade' ? 'w-1/6' : ''}
+   
              `}
                   key={index}
                 >
