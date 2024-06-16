@@ -2,6 +2,7 @@
 import { Table } from "@/components/table/table";
 import { ColunmTable, Table2 } from "@/components/table/table2";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { EllipsisVertical, Search } from "lucide-react";
 import { useState } from "react";
@@ -225,8 +226,11 @@ export default function Produtos() {
 
   const handleSearch = (e: any) => {
     e.preventDefault();
-    const filteredProducts = row.filter((product) =>
-      product.produto.toLowerCase().includes(search.toLowerCase())
+    const filteredProducts = row.filter(
+      (product) =>
+        product.produto.toLowerCase().includes(search.toLowerCase()) ||
+        product.descricao.toLowerCase().includes(search.toLowerCase()) ||
+        product.id.toString().includes(search)
     );
     console.log(filteredProducts);
     setData(filteredProducts);
@@ -262,18 +266,33 @@ export default function Produtos() {
         </div>
       </div>
       <div className="pt-6 overflow-y">
-        {/*<Table head={header} itens={data} />*/}
-        <Table2 itens={data} className="w-full">
+        <div>
+          {data.map((product) => {
+            return (
+              <Card className="sm:hidden my-2" key={product.id}>
+                <CardHeader className="flex flex-row justify-between  items-center">
+                  <CardTitle>{product.produto}</CardTitle>
+                  <CardTitle>{product.preco}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-row gap-2">
+                  <p>Id: {product.id}</p>
+                  <p>Quantidade: {product.quantidade}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+        <Table2 itens={data} className="w-full hidden sm:table">
           <ColunmTable
             name="Id"
             column="id"
-            className=" w-16 text-center border p-2"
+            className=" w-20 text-center border p-2"
           />
 
           <ColunmTable
             name="Produto"
             column="produto"
-            className=" w-80 text-start p-2 border"
+            className=" w-72 text-start p-2 border"
           />
 
           <ColunmTable

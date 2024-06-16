@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import naturalSort from "natural-sort";
+import { ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
 
 export function Table2({ children, itens, className }: any) {
-    const [sortOrder, setSortOrder] = useState("asc");
+  const [sortOrder, setSortOrder] = useState("asc");
   const [order, setOrder] = useState(null);
   const [data, setData] = useState(itens);
 
@@ -23,15 +24,22 @@ export function Table2({ children, itens, className }: any) {
     setData(itens);
   }, [itens]);
 
-  
   return (
     <table className={className}>
       <thead>
         <tr className="bg-foreground text-background">
           {React.Children.map(children, (child: any) => {
             return (
-              <th className={child.props.className} onClick={() => handleSort(child.props.column)} key={child.props.column}>
-                {child.props.name}
+              <th
+                className={child.props.className}
+                onClick={() => handleSort(child.props.column)}
+                key={child.props.column}
+              >
+                <span
+                  className={` flex flex-row gap-4 justify-between text-background`}
+                >
+                  {child.props.name}
+                </span>
               </th>
             );
           })}
@@ -42,7 +50,11 @@ export function Table2({ children, itens, className }: any) {
           return (
             <tr key={data.id}>
               {React.Children.map(children, (child: any, index) => {
-                return <td className={child.props.className}>{data[child.props.column]}</td>;
+                return (
+                  <td className={child.props.className}>
+                    {data[child.props.column]}
+                  </td>
+                );
               })}
             </tr>
           );
@@ -59,6 +71,4 @@ export function ColunmTable(props: any) {
   );
 }
 
-
-
-export default [Table2, ColunmTable ];
+export default [Table2, ColunmTable];
