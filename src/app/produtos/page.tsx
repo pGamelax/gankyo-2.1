@@ -265,52 +265,54 @@ export default function Produtos() {
           </Button>
         </div>
       </div>
-      <div className="pt-6 overflow-y">
+      <div className="pt-6">
         <div>
           {data.map((product) => {
             return (
               <Card className="sm:hidden my-2" key={product.id}>
                 <CardHeader className="flex flex-row justify-between  items-center">
                   <CardTitle>{product.produto}</CardTitle>
-                  <CardTitle>{product.preco}</CardTitle>
+                  <CardTitle>R$ {product.preco}</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-row gap-2">
+                <CardContent className="flex flex-row justify-between">
                   <p>Id: {product.id}</p>
-                  <p>Quantidade: {product.quantidade}</p>
+                  <p>Estoque: {product.quantidade}</p>
                 </CardContent>
               </Card>
             );
           })}
         </div>
-        <Table2 itens={data} className="w-full hidden sm:table">
-          <ColunmTable
-            name="Id"
-            column="id"
-            className=" w-20 text-center border p-2"
-          />
+        <div className="overflow-x-auto h-[calc(100vh-160px)]">
+          <Table2 itens={data} className="w-full hidden sm:table">
+            <ColunmTable
+              name="Id"
+              column="id"
+              className=" w-20 text-center border p-2"
+            />
 
-          <ColunmTable
-            name="Produto"
-            column="produto"
-            className=" w-72 text-start p-2 border"
-          />
+            <ColunmTable
+              name="Produto"
+              column="produto"
+              className=" w-72 text-start p-2 border"
+            />
 
-          <ColunmTable
-            name="Descricao"
-            column="descricao"
-            className=" border p-2 w-96"
-          />
-          <ColunmTable
-            name="Quantidade"
-            column="quantidade"
-            className="w-20 items-center border p-2"
-          />
-          <ColunmTable
-            name="Preco"
-            column="preco"
-            className="border p-2 w-24"
-          />
-        </Table2>
+            <ColunmTable
+              name="Descricao"
+              column="descricao"
+              className=" border p-2 w-96"
+            />
+            <ColunmTable
+              name="Quantidade"
+              column="quantidade"
+              className="w-20 items-center border p-2"
+            />
+            <ColunmTable
+              name="Preco"
+              column="preco"
+              className="border p-2 w-24"
+            />
+          </Table2>
+        </div>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Gankyo",
   description: "a web app for company management",
+  
 };
 
 export default function RootLayout({
