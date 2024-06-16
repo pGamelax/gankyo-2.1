@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import naturalSort from "natural-sort";
-import { ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
+import {
+  ArrowDownNarrowWide,
+  ArrowUpNarrowWide,
+  PencilLine,
+} from "lucide-react";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 export function Table2({ children, itens, className }: any) {
   const [sortOrder, setSortOrder] = useState("asc");
@@ -27,7 +33,7 @@ export function Table2({ children, itens, className }: any) {
   return (
     <table className={className}>
       <thead>
-        <tr className="bg-foreground text-background">
+        <tr className="">
           {React.Children.map(children, (child: any) => {
             return (
               <th
@@ -35,14 +41,13 @@ export function Table2({ children, itens, className }: any) {
                 onClick={() => handleSort(child.props.column)}
                 key={child.props.column}
               >
-                <span
-                  className={` flex flex-row gap-4 justify-between text-background`}
-                >
+                <span className={` flex flex-row gap-4 justify-between `}>
                   {child.props.name}
                 </span>
               </th>
             );
           })}
+          <th className="w-8 text-center border p-2">Editar</th>
         </tr>
       </thead>
       <tbody>
@@ -56,6 +61,13 @@ export function Table2({ children, itens, className }: any) {
                   </td>
                 );
               })}
+              <td className=" items-center flex justify-center border-r border-t p-2">
+                <Link href={`/produtos/${data.id}`}>
+                <Button variant="link">
+                  <PencilLine className="w-6 h-6 text-center " />
+                </Button>
+                </Link>
+              </td>
             </tr>
           );
         })}

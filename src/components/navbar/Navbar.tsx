@@ -62,7 +62,7 @@ const routes = [
 export function Navbar() {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="w-full fixed">
+    <div className="w-full">
     <div className="h-14 px-4 relative flex items-center justify-between bg-background border-b">
       <div className="flex gap-10">
         <Sheet>
