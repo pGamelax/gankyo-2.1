@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function Produtos() {
   const [search, setSearch] = useState("");
-  const [select, setSelected] = useState({})
+  const [select, setSelected] = useState({}) as any
 
   const row = producs
 
