@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import naturalSort from "natural-sort";
-import {
-  ArrowDownNarrowWide,
-  ArrowUpNarrowWide,
-  PencilLine,
-} from "lucide-react";
-import { Button } from "../ui/button";
-import Link from "next/link";
 
-export function Table2({ children, itens, className }: any) {
+
+export function Table2({ children, itens, className, select, setSelected }: any) {
   const [sortOrder, setSortOrder] = useState("asc");
   const [order, setOrder] = useState(null);
   const [data, setData] = useState(itens);
+
+  const handleSelect = (field : any, value:any) => {
+    const filtered = itens.find((item: any) => 
+      (item[field] == value)
+    )
+    setSelected(filtered)
+  }
 
   const handleSort = (field: any) => {
     setOrder(field);
@@ -47,27 +48,20 @@ export function Table2({ children, itens, className }: any) {
               </th>
             );
           })}
-          <th className="w-8 text-center border p-2">Editar</th>
         </tr>
       </thead>
       <tbody>
         {data.map((data: any) => {
           return (
-            <tr key={data.id}>
+            <tr key={data.id} className={`${select.id == data.id ? 'bg-foreground text-background' : '' }`}>
               {React.Children.map(children, (child: any, index) => {
                 return (
-                  <td className={child.props.className}>
+                  <td className={child.props.className} onClick={() => handleSelect(child.props.column, data[child.props.column])}>
                     {data[child.props.column]}
                   </td>
                 );
               })}
-              <td className=" items-center flex justify-center border-r border-t p-2">
-                <Link href={`/produtos/${data.id}`}>
-                <Button variant="link">
-                  <PencilLine className="w-6 h-6 text-center " />
-                </Button>
-                </Link>
-              </td>
+             
             </tr>
           );
         })}

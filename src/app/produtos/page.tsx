@@ -6,10 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { producs } from "@/lib/data";
 import { EllipsisVertical, Search } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Produtos() {
   const [search, setSearch] = useState("");
+  const [select, setSelected] = useState({})
 
   const row = producs
 
@@ -54,13 +56,18 @@ export default function Produtos() {
           <Button variant="default" className="hidden sm:flex">
             Cadastrar
           </Button>
+          <Button variant="default" className="hidden sm:flex" disabled={select.id == undefined}>
+          <Link href={`/produtos/${select.id} `}>
+            Atualizar
+          </Link>
+          </Button>
         </div>
       </div>
       <div className="pt-6">
         <div>
           {data.map((product) => {
             return (
-              <Card className="sm:hidden my-2" key={product.id}>
+              <Card className={`sm:hidden my-2 ${select.id == product.id ? 'bg-foreground text-background' : ""}`} key={product.id} onClick={() => setSelected(product)}>
                 <CardHeader className="flex flex-row justify-between  items-center">
                   <CardTitle>{product.produto}</CardTitle>
                   <CardTitle>R$ {product.preco}</CardTitle>
@@ -74,7 +81,12 @@ export default function Produtos() {
           })}
         </div>
         <div className="overflow-x-auto h-[calc(100vh-160 px)]">
-          <Table2 itens={data} className="w-full hidden sm:table">
+          <Table2 
+          itens={data} 
+          select={select}
+          setSelected={setSelected}
+          className="w-full hidden sm:table"
+          >
             <ColunmTable
               name="Id"
               column="id"
