@@ -1,34 +1,53 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import InputLabel from "@/components/ui/input-label";
 import { producs } from "@/lib/data";
-import { EllipsisVertical, Search } from "lucide-react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 export default function ProductDetails({ params }: any) {
-  const data = producs.find((product) => product.id === +params.id);
+  const productFound = producs.find((product) => product.id === +params.id);
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      id: productFound?.id,
+      product: productFound?.produto,
+      descricao: productFound?.descricao,
+      preco: productFound?.preco,
+    },
+  });
   return (
     <div className="px-8 pt-6 w-full">
       <div className="flex flex-row w-full sm:w-max items-center justify-between">
         <h1 className="xl:text-2xl font-sans font-bold">Detalhes</h1>
       </div>
-      <div className="pt-6">
+      <form
+        onSubmit={handleSubmit((data) => console.log(data))}
+        className="pt-6"
+      >
         <InputLabel
           label="Id"
-          value={data?.id}
+          register={register("id")}
           disabled
           className="w-24  mb-2 "
         />
         <InputLabel
           label="Produto"
-          value={data?.produto}
+          register={register("product")}
           className="w-96 mb-2"
         />
         <InputLabel
           label="Descrição"
-          value={data?.descricao}
+          register={register("descricao")}
           className=" w-96 mb-2"
         />
-        <InputLabel label="Preço" value={data?.preco} className=" w-96 mb-2" />
-      </div>
+        <InputLabel
+          label="Preço"
+          register={register("preco")}
+          className=" w-96 mb-2"
+        />
+        <Button type="submit" >Console</Button>
+      </form>
     </div>
   );
 }
