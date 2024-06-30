@@ -4,30 +4,52 @@ import { ColunmTable, Table2 } from "@/components/table/table2";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { producs } from "@/lib/data";
+import axios from "axios";
 import { EllipsisVertical, Search } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+
+export interface ProductProps {
+  id: number,
+	produto: string,
+	descricao: string
+	quantidade: number,
+	preco: number,
+  custo: number
+}
+
 
 export default function Produtos() {
   const [search, setSearch] = useState("");
-  const [select, setSelected] = useState({}) as any
-
-  const row = producs
+  const [select, setSelected] = useState({}) as any;
+  const [row, setRow] = useState([])
 
   const [data, setData] = useState(row);
 
   const handleSearch = (e: any) => {
     e.preventDefault();
     const filteredProducts = row.filter(
-      (product) =>
+      (product: ProductProps) =>
         product.produto.toLowerCase().includes(search.toLowerCase()) ||
         product.descricao.toLowerCase().includes(search.toLowerCase()) ||
         product.id.toString().includes(search)
     );
-    console.log(filteredProducts);
     setData(filteredProducts);
   };
+
+  useEffect(() => {
+    axios
+      .get("https://gankyo-server.onrender.com/product")
+      .then((response) => {setRow(response.data)
+        setData(response.data)
+      });
+
+      
+
+    
+  }, []);
+
   return (
     <div className="px-8 pt-6">
       <div className="flex flex-col gap-2 md:flex-row items-center justify-between">
@@ -54,20 +76,28 @@ export default function Produtos() {
             </Button>
           </form>
           <Button variant="default" className="hidden sm:flex">
-            Cadastrar
+            <Link href={"/produtos/cadastrar"}>Cadastrar</Link>
           </Button>
-          <Button variant="default" className="hidden sm:flex" disabled={select.id == undefined}>
-          <Link href={`/produtos/${select.id} `}>
-            Atualizar
-          </Link>
+          <Button
+            variant="default"
+            className="hidden sm:flex"
+            disabled={select.id == undefined}
+          >
+            <Link href={`/produtos/${select.id} `}>Atualizar</Link>
           </Button>
         </div>
       </div>
       <div className="pt-6">
         <div>
-          {data.map((product) => {
+          {data.map((product: ProductProps) => {
             return (
-              <Card className={`sm:hidden my-2 ${select.id == product.id ? 'bg-foreground text-background' : ""}`} key={product.id} onClick={() => setSelected(product)}>
+              <Card
+                className={`sm:hidden my-2 ${
+                  select.id == product.id ? "bg-foreground text-background" : ""
+                }`}
+                key={product.id}
+                onClick={() => setSelected(product)}
+              >
                 <CardHeader className="flex flex-row justify-between  items-center">
                   <CardTitle>{product.produto}</CardTitle>
                   <CardTitle>R$ {product.preco}</CardTitle>
@@ -81,11 +111,11 @@ export default function Produtos() {
           })}
         </div>
         <div className="overflow-x-auto h-[calc(100vh-160 px)]">
-          <Table2 
-          itens={data} 
-          select={select}
-          setSelected={setSelected}
-          className="w-full hidden sm:table"
+          <Table2
+            itens={data}
+            select={select}
+            setSelected={setSelected}
+            className="w-full hidden sm:table"
           >
             <ColunmTable
               name="Id"
@@ -114,7 +144,6 @@ export default function Produtos() {
               column="preco"
               className="border p-2 w-24"
             />
-           
           </Table2>
         </div>
       </div>
